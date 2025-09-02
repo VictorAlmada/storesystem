@@ -20,11 +20,14 @@ public class DatabaseSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+
         // Seeding Categories
         Categoria cat1 = new Categoria(null,"Eletrônicos", null);
         Categoria cat2 = new Categoria(null,"Livros", null);
         Categoria cat3 = new Categoria(null,"Roupas", null);
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
 
         // Seeding Products
         Produto p1 = new Produto(null,"Notebook Dell", 3500.00, 10, cat1);
