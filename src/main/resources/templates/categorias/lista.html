@@ -15,10 +15,16 @@
     <tr>
         <th>ID</th>
         <th>Nome</th>
+        <th>Ações</th>
     </tr>
     <tr th:each="categoria : ${categorias}">
         <td th:text="${categoria.id}"></td>
         <td th:text="${categoria.nome}"></td>
+        <td>
+            <a th:href="@{|/categorias/editar/${categoria.id}|}">Editar</a>
+            <a th:href="@{|/categorias/excluir/${categoria.id}|}"
+               onclick="return confirm('Tem certeza que deseja excluir esta categoria?');">Excluir</a>
+        </td>
     </tr>
 </table>
 </body>

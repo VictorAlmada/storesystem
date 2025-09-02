@@ -9,12 +9,15 @@
 <body>
 <h1>Cadastrar Categoria</h1>
 
-<form th:action="@{/categorias}" th:object="${categoria}" method="post">
+<!-- Formulário para criar ou atualizar uma categoria -->
+<form th:action="${categoria.id} != null ? @{/categorias/atualizar/{id}(id=${categoria.id})} : @{/categorias}"
+      th:object="${categoria}" method="post">
+
     <label for="nome">Nome:</label>
     <input type="text" id="nome" th:field="*{nome}"/>
     <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
     <br/><br/>
-    <button type="submit">Salvar</button>
+    <button type="submit" th:text="${produto.id} != null ? 'Atualizar' : 'Salvar'"></button>
 </form>
 
 <a th:href="@{/categorias}">Voltar</a>

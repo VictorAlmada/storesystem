@@ -16,6 +16,7 @@
         <th>Preço</th>
         <th>Quantidade</th>
         <th>Categoria</th>
+        <th>Ações</th>
     </tr>
     <tr th:each="produto : ${produtos}">
         <td th:text="${produto.id}"></td>
@@ -23,6 +24,14 @@
         <td th:text="${produto.preco}"></td>
         <td th:text="${produto.quantidade}"></td>
         <td th:text="${produto.categoria.nome}"></td>
+        <td>
+            <a th:href="@{|/produtos/editar/${produto.id}|}">Editar</a>
+            <a th:href="@{|/produtos/excluir/${produto.id}|}"
+               th:onclick="return confirm('Tem certeza que deseja excluir este produto?');">
+               Excluir
+            </a>
+        </td>
+
     </tr>
 </table>
 </body>

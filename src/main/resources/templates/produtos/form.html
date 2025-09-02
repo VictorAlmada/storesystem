@@ -7,7 +7,8 @@
 <body>
 <h1>Cadastrar Produto</h1>
 
-<form th:action="@{/produtos}" th:object="${produto}" method="post">
+<form th:action="${produto.id} != null ? @{/produtos/atualizar/{id}(id=${produto.id})} : @{/produtos}"
+      th:object="${produto}" method="post">
 
     <label for="nome">Nome:</label>
     <input type="text" id="nome" th:field="*{nome}"/>
@@ -25,7 +26,7 @@
     <br/><br/>
 
     <label for="categoria">Categoria:</label>
-    <select id="categoria" th:field="*{categoria}">
+    <select id="categoria" th:field="*{categoria.id}">
         <option th:each="cat : ${categorias}"
                 th:value="${cat.id}"
                 th:text="${cat.nome}">
@@ -33,7 +34,7 @@
     </select>
     <br/><br/>
 
-    <button type="submit">Salvar</button>
+    <button type="submit" th:text="${produto.id} != null ? 'Atualizar' : 'Salvar'"></button>
 </form>
 
 <a th:href="@{/produtos}">Voltar</a>
