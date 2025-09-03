@@ -1,42 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Cadastro de Produto</title>
-    <meta charset="UTF-8"/>
-</head>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <body>
-<h1>Cadastrar Produto</h1>
+<div layout:fragment="content">
+    <h2 th:text="${produto.id} != null ? 'Editar Produto' : 'Novo Produto'"></h2>
 
-<form th:action="${produto.id} != null ? @{/produtos/atualizar/{id}(id=${produto.id})} : @{/produtos}"
-      th:object="${produto}" method="post">
+    <form th:action="${produto.id} != null ? @{/produtos/atualizar/{id}(id=${produto.id})} : @{/produtos}"
+          th:object="${produto}" method="post">
 
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}"/>
-    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-    <br/><br/>
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" class="form-control"/>
+            <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+        </div>
 
-    <label for="preco">Preço:</label>
-    <input type="number" step="0.01" id="preco" th:field="*{preco}"/>
-    <div th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></div>
-    <br/><br/>
+        <div class="mb-3">
+            <label for="preco" class="form-label">Preço:</label>
+            <input type="number" step="0.01" id="preco" th:field="*{preco}" class="form-control"/>
+            <div th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" class="text-danger"></div>
+        </div>
 
-    <label for="quantidade">Quantidade:</label>
-    <input type="number" id="quantidade" th:field="*{quantidade}"/>
-    <div th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></div>
-    <br/><br/>
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoria:</label>
+            <select id="categoria" th:field="*{categoria.id}" class="form-select">
+                <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nome}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('categoria.id')}" th:errors="*{categoria.id}" class="text-danger"></div>
+        </div>
 
-    <label for="categoria">Categoria:</label>
-    <select id="categoria" th:field="*{categoria.id}">
-        <option th:each="cat : ${categorias}"
-                th:value="${cat.id}"
-                th:text="${cat.nome}">
-        </option>
-    </select>
-    <br/><br/>
-
-    <button type="submit" th:text="${produto.id} != null ? 'Atualizar' : 'Salvar'"></button>
-</form>
-
-<a th:href="@{/produtos}">Voltar</a>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="/produtos" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
 </body>
 </html>

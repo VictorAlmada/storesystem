@@ -23,7 +23,7 @@ public class CategoriaController {
         return "categorias/lista";
     }
     // Método para exibir o formulário de criação de uma nova categoria
-    @GetMapping("/nova")
+    @GetMapping("/novo")
     public String novo(Model model) {
         model.addAttribute("categoria", new Categoria());
         return "categorias/form";

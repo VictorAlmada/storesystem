@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<body>
+<!-- Aqui vai o conteúdo que será injetado no layout -->
+<div layout:fragment="content">
+    <div class="text-center">
+        <h1 class="display-5 fw-semibold mb-3">Bem-vindo ao StoreSystem</h1>
+        <p class="lead mb-4">Gerencie categorias e produtos de forma simples e eficiente.</p>
+
+        <div class="d-grid d-sm-flex gap-3 justify-content-center">
+            <a class="btn btn-primary btn-lg" href="/produtos">Ver Produtos</a>
+            <a class="btn btn-outline-secondary btn-lg" href="/categorias">Ver Categorias</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

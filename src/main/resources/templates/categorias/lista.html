@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>Lista de Categorias</title>
-    <meta charset="UTF-8">
-</head>
-
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <body>
-<h1>Lista de Categorias</h1>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Categorias</h2>
+        <a href="/categorias/novo" class="btn btn-primary">Nova Categoria</a>
+    </div>
 
-<a th:href="@{/categorias/nova}">Adicionar Nova Categoria</a>
-
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Ações</th>
-    </tr>
-    <tr th:each="categoria : ${categorias}">
-        <td th:text="${categoria.id}"></td>
-        <td th:text="${categoria.nome}"></td>
-        <td>
-            <a th:href="@{|/categorias/editar/${categoria.id}|}">Editar</a>
-            <a th:href="@{|/categorias/excluir/${categoria.id}|}"
-               onclick="return confirm('Tem certeza que deseja excluir esta categoria?');">Excluir</a>
-        </td>
-    </tr>
-</table>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${categorias}">
+            <td th:text="${cat.id}"></td>
+            <td th:text="${cat.nome}"></td>
+            <td>
+                <a th:href="@{/categorias/editar/{id}(id=${cat.id})}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{/categorias/excluir/{id}(id=${cat.id})}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
